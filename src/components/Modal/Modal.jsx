@@ -33,7 +33,7 @@ const Modal = ({ children, title = 'Default modal', closeModal }) => {
     <div
       className={s.wrapper}
       onClick={handleBackdropClick}
-      onKeyDown={closeModal}
+      onKeyDown={closeModal} // Adding a lissener instead of useEffect()
     >
       <div className={s.content}>
         <>
