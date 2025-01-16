@@ -1,39 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import s from './Modal.module.css';
 const Modal = ({ children, title = 'Default modal', closeModal }) => {
+  const focusElement = useRef(null);
+
   const handleBackdropClick = e => {
     if (e.target === e.currentTarget) {
       closeModal();
     }
   };
+  const handleKeyDown = e =>
+    e.key === 'Escape' ? closeModal() : e.preventDefault();
 
-  // useEffect(() => {
-  //   const handleKeyDown = e => {
-  //     console.log(e.key);
-  //     if (e.key === 'Escape') {
-  //       closeModal();
-  //     }
-  //   };
+  useEffect(() => {
+    focusElement.current.focus();
+  }, []);
 
-  //   document.addEventListener('keydown', handleKeyDown);
-  //   const timeoutId = setTimeout(() => {
-  //     console.log('O_O');
-  //   }, 3000);
-  //   const intervalId = setInterval(() => {
-  //     console.log(new Date().toLocaleTimeString());
-  //   }, 1000);
-  //   return () => {
-  //     console.log('Мене закрили!');
-  //     clearInterval(intervalId);
-  //     clearTimeout(timeoutId);
-  //     document.removeEventListener('keydown', handleKeyDown);
-  //   };
-  // }, [closeModal]);
   return (
     <div
       className={s.wrapper}
       onClick={handleBackdropClick}
-      onKeyDown={closeModal} // Adding a lissener instead of useEffect()
+      onKeyDown={handleKeyDown} // Adding a lissener on .wrapper instead of document
+      tabIndex="1"
+      ref={focusElement}
     >
       <div className={s.content}>
         <>

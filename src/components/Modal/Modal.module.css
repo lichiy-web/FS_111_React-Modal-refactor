@@ -6,6 +6,9 @@
 	align-items: center;
 	background-color: rgba(0, 0, 0, 0.5);
 }
+.wrapper:focus {
+ border: 1px solid red;
+}
 .content{
   position: relative;
 	background-color: white;
