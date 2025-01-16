@@ -8,6 +8,8 @@ const Modal = ({ children, title = 'Default modal', closeModal }) => {
       closeModal();
     }
   };
+  // The handler closes the Modal windows after pressing ESC key and
+  // prevents the browser from reacting by default when other keys are pressed
   const handleKeyDown = e =>
     e.key === 'Escape' ? closeModal() : e.preventDefault();
 
